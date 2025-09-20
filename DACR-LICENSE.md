@@ -1,7 +1,7 @@
 # DACR License (v1.0)
 
 **Defensive AI Commercial Rights (DACR) License**  
-Copyright (c) 2025, [Erwin Maurice McDonald]
+Copyright (c) 2025, Erwin Maurice McDonald
 
 ---
 
