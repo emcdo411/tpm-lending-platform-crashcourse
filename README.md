@@ -254,6 +254,8 @@ tpm-lending-platform-crashcourse/
 ---
 
 ## 🔄 End-to-End Workflow
+
+```mermaid
 flowchart LR
 
 %% ===== Day groups (horizontal flow) =====
