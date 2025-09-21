@@ -255,11 +255,55 @@ tpm-lending-platform-crashcourse/
 
 ## 🔄 End-to-End Workflow
 flowchart LR
-A[Day 1 — Vision, roadmap, stories] --> B[Day 2 — SQL KPIs]
-B --> C[Day 3 — APIs and ingestion]
-C --> D[Day 4 — Python A/B and R charts]
-D --> E[Day 5 — Interview readiness]
-E --> F[CI proof and portfolio]
+
+%% ===== Day groups (horizontal flow) =====
+subgraph D1[Day 1 - Product fundamentals]
+  A1[Vision]
+  A2[Roadmap (Now / Next / Later)]
+  A3[User stories + acceptance criteria]
+  A1 --> A2 --> A3
+end
+
+subgraph D2[Day 2 - SQL and data]
+  B1[Build SQLite database]
+  B2[Run KPI queries]
+  B3[Add tests + CI]
+  A3 --> B1 --> B2 --> B3
+end
+
+subgraph D3[Day 3 - APIs and ingestion]
+  C1[Prototype client (timeouts, retries)]
+  C2[Validate schema and errors]
+  C3[Ingest to SQLite (upsert)]
+  B3 --> C1 --> C2 --> C3
+end
+
+subgraph D4[Day 4 - Python and R]
+  D1[A/B analysis (Python)]
+  D2[KPI chart (R)]
+  C3 --> D1 --> D2
+end
+
+subgraph D5[Day 5 - Interview readiness]
+  E1[Pitch + STAR stories]
+  E2[Product case readout]
+  E3[Tech recap (SQL, APIs, A/B)]
+  E4[CI validator + portfolio]
+  D2 --> E1 --> E2 --> E3 --> E4
+end
+
+%% ===== Styling (GitHub-friendly) =====
+classDef d1 fill:#E8F5E9,stroke:#2E7D32,color:#1B5E20,stroke-width:1px;
+classDef d2 fill:#E3F2FD,stroke:#1565C0,color:#0D47A1,stroke-width:1px;
+classDef d3 fill:#FFF3E0,stroke:#EF6C00,color:#E65100,stroke-width:1px;
+classDef d4 fill:#F3E5F5,stroke:#6A1B9A,color:#4A148C,stroke-width:1px;
+classDef d5 fill:#FBE9E7,stroke:#D84315,color:#BF360C,stroke-width:1px;
+
+class A1,A2,A3 d1;
+class B1,B2,B3 d2;
+class C1,C2,C3 d3;
+class D1,D2 d4;
+class E1,E2,E3,E4 d5;
 
 ```
 
