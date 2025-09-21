@@ -32,30 +32,33 @@ By the end of Day 2 you will:
 ## Workflow
 
 ```mermaid
+## Workflow
+
+```mermaid
 flowchart TD
 A[Plan Schema] --> B[Create schema.sql]
 B --> C[Seed seed.sql]
 C --> D[Run queries.sql]
-D --> E[Automated Tests (CI)]
+D --> E[Automated Tests - CI]
 E --> F[Pull Request]
-F --> G[Staging Deploy (Env Approval)]
+F --> G[Staging Deploy - Env Approval]
 G --> H[Merge]
-Why diagram? It keeps Day-2 focused on prove-ability: a straight line from schema → data → queries → automated checks → human approval.
+
+Why a diagram? It keeps Day-2 focused on prove-ability: a straight line from schema → data → queries → automated checks → human approval.
 
 What You Will Build
+
 SQLite database (lending_demo.db) built from schema.sql + seed.sql.
 
 Queries that answer core PM questions (conversion, fraud, time-to-approval).
 
-Python tests (tiny) to validate counts/constraints.
+Python tests to validate counts/constraints.
 
 CI workflow that rebuilds and tests on every push/PR.
 
 Staging workflow that requires manual approval before “deploy”.
 
 Files in This Lesson
-pgsql
-Copy code
 Day2_SQL_Data_Fundamentals/
 ├── README.md
 ├── lesson.md
@@ -68,18 +71,18 @@ Day2_SQL_Data_Fundamentals/
     └── workflows/
         ├── sql-ci.yml
         └── deploy-staging.yml
+
 Quick Start
-powershell
-Copy code
+Using sqlite3 CLI (if installed)
 # From repo root
 cd Day2_SQL_Data_Fundamentals
-
-# If you have sqlite3 installed:
 sqlite3 lending_demo.db ".read schema.sql"
 sqlite3 lending_demo.db ".read seed.sql"
 sqlite3 lending_demo.db ".read queries.sql"
 
-# If you don't have sqlite3, use Python's sqlite3 module:
+Using Python only (no sqlite3 CLI needed)
+# From repo root
+cd Day2_SQL_Data_Fundamentals
 python - << 'PY'
 import sqlite3, pathlib
 db = "lending_demo.db"
@@ -87,17 +90,18 @@ sql = lambda p: pathlib.Path(p).read_text(encoding="utf-8")
 con = sqlite3.connect(db)
 con.executescript(sql("schema.sql"))
 con.executescript(sql("seed.sql"))
-for row in con.execute("select count(*) from borrowers"): print(("borrowers", row[0]))
+for row in con.execute("select count(*) from borrowers"):
+    print(("borrowers", row[0]))
 con.close()
 PY
-Git basics (new repo path):
 
-powershell
-Copy code
+Git basics (commit/push this lesson)
 git add Day2_SQL_Data_Fundamentals
 git commit -m "Day 2: schema, seed, queries, tests, CI"
 git push
+
 CI and Manual Approval
+
 CI: .github/workflows/sql-ci.yml builds lending_demo.db and runs tests/test_sql.py on every push/PR.
 
 Manual Approval: .github/workflows/deploy-staging.yml uses environment: staging.
@@ -105,11 +109,12 @@ In GitHub → Settings → Environments → New environment: staging → add Req
 The deploy job will pause until approved in the PR Checks UI.
 
 Submission
+
 Open a PR titled “Day 2 – SQL Fundamentals”. Ensure:
 
 CI passes.
 
-Staging job shows as Waiting until you approve it in the PR checks.
+Staging job shows Waiting until you approve it in the PR checks.
 
 After approval, the job runs; then Merge.
 
