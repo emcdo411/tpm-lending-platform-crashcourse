@@ -14,8 +14,12 @@
 - [What You Will Build](#what-you-will-build)
 - [Files in This Lesson](#files-in-this-lesson)
 - [Quick Start](#quick-start)
+  - [Using sqlite3 CLI (if installed)](#using-sqlite3-cli-if-installed)
+  - [Using Python only (no sqlite3 CLI needed)](#using-python-only-no-sqlite3-cli-needed)
+  - [Git basics (commit/push this lesson)](#git-basics-commitpush-this-lesson)
 - [CI and Manual Approval](#ci-and-manual-approval)
 - [Submission](#submission)
+- [Mermaid Troubleshooting](#mermaid-troubleshooting)
 
 ---
 
@@ -30,6 +34,7 @@ By the end of Day 2 you will:
 ---
 
 ## Workflow
+
 ```mermaid
 flowchart TD
 A[Plan Schema] --> B[Create schema.sql]
@@ -39,22 +44,25 @@ D --> E[Automated Tests - CI]
 E --> F[Pull Request]
 F --> G[Staging Deploy - Env Approval]
 G --> H[Merge]
+````
 
-Why a diagram? It keeps Day-2 focused on prove-ability: a straight line from schema → data → queries → automated checks → human approval.
+*Why a diagram?* It keeps Day-2 focused on prove-ability: a straight line from schema → data → queries → automated checks → human approval.
 
-What You Will Build
+---
 
-SQLite database (lending_demo.db) built from schema.sql + seed.sql.
+## What You Will Build
 
-Queries that answer core PM questions (conversion, fraud, time-to-approval).
+* **SQLite database** (`lending_demo.db`) built from `schema.sql` + `seed.sql`.
+* **Queries** that answer core PM questions (conversion, fraud, time-to-approval).
+* **Python tests** to validate counts/constraints.
+* **CI workflow** that rebuilds and tests on every push/PR.
+* **Staging workflow** that requires manual approval before “deploy”.
 
-Python tests to validate counts/constraints.
+---
 
-CI workflow that rebuilds and tests on every push/PR.
+## Files in This Lesson
 
-Staging workflow that requires manual approval before “deploy”.
-
-Files in This Lesson
+```text
 Day2_SQL_Data_Fundamentals/
 ├── README.md
 ├── lesson.md
@@ -67,16 +75,25 @@ Day2_SQL_Data_Fundamentals/
     └── workflows/
         ├── sql-ci.yml
         └── deploy-staging.yml
+```
 
-Quick Start
-Using sqlite3 CLI (if installed)
+---
+
+## Quick Start
+
+### Using sqlite3 CLI (if installed)
+
+```bash
 # From repo root
 cd Day2_SQL_Data_Fundamentals
 sqlite3 lending_demo.db ".read schema.sql"
 sqlite3 lending_demo.db ".read seed.sql"
 sqlite3 lending_demo.db ".read queries.sql"
+```
 
-Using Python only (no sqlite3 CLI needed)
+### Using Python only (no sqlite3 CLI needed)
+
+```bash
 # From repo root
 cd Day2_SQL_Data_Fundamentals
 python - << 'PY'
@@ -90,32 +107,43 @@ for row in con.execute("select count(*) from borrowers"):
     print(("borrowers", row[0]))
 con.close()
 PY
+```
 
-Git basics (commit/push this lesson)
+### Git basics (commit/push this lesson)
+
+```bash
 git add Day2_SQL_Data_Fundamentals
 git commit -m "Day 2: schema, seed, queries, tests, CI"
 git push
+```
 
-CI and Manual Approval
+---
 
-CI: .github/workflows/sql-ci.yml builds lending_demo.db and runs tests/test_sql.py on every push/PR.
+## CI and Manual Approval
 
-Manual Approval: .github/workflows/deploy-staging.yml uses environment: staging.
-In GitHub → Settings → Environments → New environment: staging → add Required reviewers (you).
-The deploy job will pause until approved in the PR Checks UI.
+* **CI:** `.github/workflows/sql-ci.yml` builds `lending_demo.db` and runs `tests/test_sql.py` on every push/PR.
+* **Manual Approval:** `.github/workflows/deploy-staging.yml` uses `environment: staging`.
+  In GitHub → **Settings → Environments → New environment: `staging`** → add **Required reviewers** (you).
+  The deploy job will **pause** until approved in the PR Checks UI.
 
-Submission
+---
 
-Open a PR titled “Day 2 – SQL Fundamentals”. Ensure:
+## Submission
 
-CI passes.
+Open a PR titled **“Day 2 – SQL Fundamentals”**. Ensure:
 
-Staging job shows Waiting until you approve it in the PR checks.
+* CI **passes**.
+* The **staging** job shows **Waiting** until you approve it in the PR checks.
+* After approval, the job runs; then **Merge**.
 
-After approval, the job runs; then Merge.
+That’s interview-ready proof.
 
+---
 
-### Quick tips
-- Make sure the ```mermaid fence starts at column 1 and is **closed** before any prose.
-- Keep **only Mermaid syntax** inside the Mermaid block (no headings, bullets, or plain text).
-- Avoid parentheses in labels if you still see errors; use dashes like “Automated Tests - CI”.
+## Mermaid Troubleshooting
+
+* Put the Mermaid fence at column 1: three backticks + `mermaid` on its own line, then close the fence with three backticks.
+* Keep **only Mermaid syntax** inside the Mermaid block (no prose or lists).
+* One edge per line; avoid parentheses in labels if your renderer is picky (use “- CI”).
+
+```
