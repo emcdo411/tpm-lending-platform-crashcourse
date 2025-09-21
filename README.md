@@ -255,15 +255,65 @@ tpm-lending-platform-crashcourse/
 
 ## 🔄 End-to-End Workflow
 
-```mermaid
-flowchart TD
-A[Define Product Vision] --> B[Roadmap & Epics]
-B --> C[Backlog Refinement & User Stories]
-C --> D[SQL KPIs: Approval • Abandonment • Time-to-Approval • Flags]
-D --> E[API Evaluation & Resilient Ingestion]
-E --> F[Python A/B + R KPI Charts]
-F --> G[Interview Readiness: Pitch • STAR • Case • Tech Recap]
-G --> H[CI Proof & Portfolio]
+flowchart LR
+
+%% ---------- LAYOUT ----------
+%% Horizontal flow, grouped by day subgraphs
+%% Keep labels simple (no bullets or extra punctuation)
+
+subgraph D1[Day 1 — Product fundamentals]
+  A[Define product vision]
+  A --> B[Roadmap and epics]
+  B --> C[Backlog refinement and user stories]
+end
+
+subgraph D2[Day 2 — SQL and data]
+  D[SQL KPIs: approval, abandonment, time to approval, flags]
+end
+
+subgraph D3[Day 3 — APIs and ingestion]
+  E[API evaluation and resilient ingestion]
+end
+
+subgraph D4[Day 4 — Python and R]
+  F[Python A/B readout and R KPI charts]
+end
+
+subgraph D5[Day 5 — Interview readiness]
+  G[Interview readiness: pitch, STAR, case, tech recap]
+  G --> H[CI proof and portfolio]
+end
+
+%% Main flow across days
+C --> D --> E --> F --> G
+
+%% ---------- STYLING ----------
+classDef day1 fill:#E8F5E9,stroke:#2E7D32,stroke-width:1px,color:#1B5E20;
+classDef day2 fill:#E3F2FD,stroke:#1565C0,stroke-width:1px,color:#0D47A1;
+classDef day3 fill:#FFF3E0,stroke:#EF6C00,stroke-width:1px,color:#E65100;
+classDef day4 fill:#F3E5F5,stroke:#6A1B9A,stroke-width:1px,color:#4A148C;
+classDef day5 fill:#FBE9E7,stroke:#D84315,stroke-width:1px,color:#BF360C;
+
+class A,B,C day1;
+class D day2;
+class E day3;
+class F day4;
+class G,H day5;
+
+%% ---------- CLICKABLE LINKS (edit branch if not 'main') ----------
+click A "https://github.com/emcdo411/tpm-lending-platform-crashcourse/tree/main/Day1_Product_Fundamentals" "Open Day 1 folder"
+click B "https://github.com/emcdo411/tpm-lending-platform-crashcourse/tree/main/Day1_Product_Fundamentals" "Open Day 1 folder"
+click C "https://github.com/emcdo411/tpm-lending-platform-crashcourse/tree/main/Day1_Product_Fundamentals" "Open Day 1 folder"
+
+click D "https://github.com/emcdo411/tpm-lending-platform-crashcourse/tree/main/Day2_SQL_Data_Fundamentals" "Open Day 2 folder"
+
+click E "https://github.com/emcdo411/tpm-lending-platform-crashcourse/tree/main/Day3_API_Data_Ingestion" "Open Day 3 folder"
+
+click F "https://github.com/emcdo411/tpm-lending-platform-crashcourse/tree/main/Day4_Python_R_for_Product" "Open Day 4 folder"
+
+click G "https://github.com/emcdo411/tpm-lending-platform-crashcourse/tree/main/Day5_Interview_Readiness" "Open Day 5 folder"
+click H "https://github.com/emcdo411/tpm-lending-platform-crashcourse/tree/main/Day5_Interview_Readiness" "Open Day 5 folder"
+
 ```
 
 ---
