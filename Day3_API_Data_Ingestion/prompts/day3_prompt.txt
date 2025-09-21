@@ -1,0 +1,1 @@
+Goal: Evaluate vendor API latency and errors.
