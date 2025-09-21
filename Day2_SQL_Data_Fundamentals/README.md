@@ -114,4 +114,8 @@ Staging job shows Waiting until you approve it in the PR checks.
 
 After approval, the job runs; then Merge.
 
-That’s interview-ready proof.
+
+### Quick tips
+- Make sure the ```mermaid fence starts at column 1 and is **closed** before any prose.
+- Keep **only Mermaid syntax** inside the Mermaid block (no headings, bullets, or plain text).
+- Avoid parentheses in labels if you still see errors; use dashes like “Automated Tests - CI”.
