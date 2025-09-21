@@ -257,13 +257,9 @@ tpm-lending-platform-crashcourse/
 
 flowchart LR
 
-%% ---------- LAYOUT ----------
-%% Horizontal flow, grouped by day subgraphs
-%% Keep labels simple (no bullets or extra punctuation)
-
+%% Layout: horizontal, grouped by day
 subgraph D1[Day 1 — Product fundamentals]
-  A[Define product vision]
-  A --> B[Roadmap and epics]
+  A[Define product vision] --> B[Roadmap and epics]
   B --> C[Backlog refinement and user stories]
 end
 
@@ -280,14 +276,13 @@ subgraph D4[Day 4 — Python and R]
 end
 
 subgraph D5[Day 5 — Interview readiness]
-  G[Interview readiness: pitch, STAR, case, tech recap]
-  G --> H[CI proof and portfolio]
+  G[Interview readiness: pitch, STAR, case, tech recap] --> H[CI proof and portfolio]
 end
 
-%% Main flow across days
+%% Flow across days
 C --> D --> E --> F --> G
 
-%% ---------- STYLING ----------
+%% Styling (GitHub-friendly)
 classDef day1 fill:#E8F5E9,stroke:#2E7D32,stroke-width:1px,color:#1B5E20;
 classDef day2 fill:#E3F2FD,stroke:#1565C0,stroke-width:1px,color:#0D47A1;
 classDef day3 fill:#FFF3E0,stroke:#EF6C00,stroke-width:1px,color:#E65100;
@@ -299,20 +294,6 @@ class D day2;
 class E day3;
 class F day4;
 class G,H day5;
-
-%% ---------- CLICKABLE LINKS (edit branch if not 'main') ----------
-click A "https://github.com/emcdo411/tpm-lending-platform-crashcourse/tree/main/Day1_Product_Fundamentals" "Open Day 1 folder"
-click B "https://github.com/emcdo411/tpm-lending-platform-crashcourse/tree/main/Day1_Product_Fundamentals" "Open Day 1 folder"
-click C "https://github.com/emcdo411/tpm-lending-platform-crashcourse/tree/main/Day1_Product_Fundamentals" "Open Day 1 folder"
-
-click D "https://github.com/emcdo411/tpm-lending-platform-crashcourse/tree/main/Day2_SQL_Data_Fundamentals" "Open Day 2 folder"
-
-click E "https://github.com/emcdo411/tpm-lending-platform-crashcourse/tree/main/Day3_API_Data_Ingestion" "Open Day 3 folder"
-
-click F "https://github.com/emcdo411/tpm-lending-platform-crashcourse/tree/main/Day4_Python_R_for_Product" "Open Day 4 folder"
-
-click G "https://github.com/emcdo411/tpm-lending-platform-crashcourse/tree/main/Day5_Interview_Readiness" "Open Day 5 folder"
-click H "https://github.com/emcdo411/tpm-lending-platform-crashcourse/tree/main/Day5_Interview_Readiness" "Open Day 5 folder"
 
 ```
 
