@@ -30,10 +30,6 @@ By the end of Day 2 you will:
 ---
 
 ## Workflow
-
-```mermaid
-## Workflow
-
 ```mermaid
 flowchart TD
 A[Plan Schema] --> B[Create schema.sql]
