@@ -45,12 +45,12 @@ Day 1 is about **structuring thinking**. A workflow clarifies handoffs from *str
 
 ```mermaid
 flowchart TD
-  A[Vision & Outcomes] --> B[Roadmap Themes];
-  B --> C[Epic Drafts];
-  C --> D[User Stories (INVEST)];
-  D --> E[Acceptance Criteria (GWT)];
-  E --> F[Backlog Refinement (DoR)];
-  F --> G[Sprint Planning (DoD in mind)];
-  G --> H[Delivery & Demo];
-  H --> I[Measure KPIs & Iterate];
+A[Vision and Outcomes] --> B[Roadmap Themes]
+B --> C[Epic Drafts]
+C --> D[User Stories - INVEST]
+D --> E[Acceptance Criteria - GWT]
+E --> F[Backlog Refinement - DoR]
+F --> G[Sprint Planning - DoD in mind]
+G --> H[Delivery and Demo]
+H --> I[Measure KPIs and Iterate]
 
