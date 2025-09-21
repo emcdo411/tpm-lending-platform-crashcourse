@@ -254,46 +254,12 @@ tpm-lending-platform-crashcourse/
 ---
 
 ## 🔄 End-to-End Workflow
-
 flowchart LR
-
-%% Layout: horizontal, grouped by day
-subgraph D1[Day 1 — Product fundamentals]
-  A[Define product vision] --> B[Roadmap and epics]
-  B --> C[Backlog refinement and user stories]
-end
-
-subgraph D2[Day 2 — SQL and data]
-  D[SQL KPIs: approval, abandonment, time to approval, flags]
-end
-
-subgraph D3[Day 3 — APIs and ingestion]
-  E[API evaluation and resilient ingestion]
-end
-
-subgraph D4[Day 4 — Python and R]
-  F[Python A/B readout and R KPI charts]
-end
-
-subgraph D5[Day 5 — Interview readiness]
-  G[Interview readiness: pitch, STAR, case, tech recap] --> H[CI proof and portfolio]
-end
-
-%% Flow across days
-C --> D --> E --> F --> G
-
-%% Styling (GitHub-friendly)
-classDef day1 fill:#E8F5E9,stroke:#2E7D32,stroke-width:1px,color:#1B5E20;
-classDef day2 fill:#E3F2FD,stroke:#1565C0,stroke-width:1px,color:#0D47A1;
-classDef day3 fill:#FFF3E0,stroke:#EF6C00,stroke-width:1px,color:#E65100;
-classDef day4 fill:#F3E5F5,stroke:#6A1B9A,stroke-width:1px,color:#4A148C;
-classDef day5 fill:#FBE9E7,stroke:#D84315,stroke-width:1px,color:#BF360C;
-
-class A,B,C day1;
-class D day2;
-class E day3;
-class F day4;
-class G,H day5;
+A[Day 1 — Vision, roadmap, stories] --> B[Day 2 — SQL KPIs]
+B --> C[Day 3 — APIs and ingestion]
+C --> D[Day 4 — Python A/B and R charts]
+D --> E[Day 5 — Interview readiness]
+E --> F[CI proof and portfolio]
 
 ```
 
