@@ -1,10 +1,13 @@
 # 🚀 Technical Product Manager Crash Course (5-Day Prep)
 
 [![License: DACR](https://img.shields.io/badge/License-DACR-blue.svg)](./LICENSE.md)
-![Tech Stack](https://img.shields.io/badge/Tech%20Stack-Python%20%7C%20R%20%7C%20SQL%20%7C%20APIs%20%7C%20Agile-blueviolet)
-![Duration](https://img.shields.io/badge/Duration-5%20days-success)
-![Level](https://img.shields.io/badge/Level-Beginner%20%E2%86%92%20Advanced-informational)
-![Domain](https://img.shields.io/badge/Domain-Fintech%20%2F%20Lending-9cf)
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
+![R](https://img.shields.io/badge/R-4.x-276DC3?logo=r&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-3-003B57?logo=sqlite&logoColor=white)
+![APIs](https://img.shields.io/badge/APIs-REST%20%7C%20JSON-FF6F00?logo=swagger&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
+![Mermaid](https://img.shields.io/badge/Diagrams-Mermaid-009688?logo=mermaid&logoColor=white)
+
 
 ---
 
