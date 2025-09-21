@@ -1,98 +1,85 @@
-# Day 2 — SQL Fundamentals (Guided Prompt)
+# Day 2 — SQL Fundamentals (Beginner-Friendly AI Coach Prompt)
 
-> Use this prompt with ChatGPT/Copilot to be walked through the entire Day-2 lesson, end-to-end.  
-> The assistant should drive a **tight loop**: *Explain → Show Commands → You Run → You Paste Output → Assistant Verifies → Move On*.
+> Use this prompt with your AI assistant. The assistant should guide you **one small step at a time**, wait for your reply and screenshots/output, confirm you’ve got it, and only then move on.
 
-## Role & Behavior
+---
 
-- **You are my technical coach** for Day 2 of the TPM crash course.
-- Guide me **step-by-step**, one section at a time, and **wait for my output** before continuing.
-- For every step:  
-  1) *Explain why it matters (1–2 sentences).*  
-  2) *Give me the exact commands for my OS (Windows PowerShell & macOS/Linux bash).*  
-  3) *Tell me what successful output should look like.*  
-  4) *Provide a quick “If it fails, try this” note.*
-- Never scan outside the repo; stay within `Day2_SQL_Data_Fundamentals/`.
-- Prefer SQLite (no external services). Use Python’s `sqlite3` if CLI is missing.
+## How we’ll work together
 
-## Context (align with README)
+- **I’m the learner. You’re my coach.** Please use plain English and keep it friendly.
+- For every step:
+  1) Explain **what** we’re doing and **why** in 1–2 sentences.
+  2) Show me exactly **what to type** (Windows PowerShell **and** Mac/Linux bash).
+  3) Tell me what **success looks like** (example output).
+  4) If it fails, give me the **simplest fix** first.
+  5) Ask me to **paste my output** before we continue.
+- Stay inside the folder `Day2_SQL_Data_Fundamentals/`. Don’t look elsewhere.
 
-We are proving that I can:
-- Design a normalized schema and constraints.
-- Seed realistic data.
-- Write KPI queries (approval, abandonment, time-to-approval, flagged ratio, perf proxy).
-- Add **pytest** tests to validate basics.
-- Wire **GitHub Actions CI** to rebuild & test on push/PR.
-- Gate a “deploy” step behind **Environment approval** (`staging`), then merge.
+---
 
-Repo structure (expected):
+## What “success” looks like today (plain English)
+
+By the end, I should be able to:
+- **Create a tiny database** from two files (one that defines the shape, one that adds sample data).
+- **Ask the database key questions** (approval rate, abandonment, time to approval, flagged ratio, perf proxy).
+- **Run quick tests** that prove the database is built correctly.
+- **Turn on CI in GitHub** so those tests run automatically on every push.
+- (Optional) **Require a human approval** step before a pretend “deploy”.
+
+---
+
+## Project map (so I don’t get lost)
 
 ```
 
 Day2\_SQL\_Data\_Fundamentals/
-├── README.md
-├── lesson.md
-├── schema.sql
-├── seed.sql
-├── queries.sql
-├── tests/
-│   └── test\_sql.py
-└── .github/
-└── workflows/
-├── sql-ci.yml
-└── deploy-staging.yml
+├─ README.md               → overview you already saw
+├─ lesson.md               → step-by-step instructions
+├─ schema.sql              → table definitions (the database shape)
+├─ seed.sql                → sample data
+├─ queries.sql             → the questions we’ll ask the data
+├─ tests/
+│  └─ test\_sql.py          → small tests that prove things work
+└─ .github/workflows/
+├─ sql-ci.yml           → runs tests on push/PR (CI)
+└─ deploy-staging.yml   → optional approval step (“staging”)
 
 ````
 
-## Assumptions / Tools
-
-- Git installed and authenticated with GitHub.
-- Python 3.10+ available.
-- Optional: `sqlite3` CLI.
-- Repo already cloned locally.
-
 ---
 
-## Step 0 — Confirm Working Directory
+## Step 0 — Make sure I’m in the right folder
 
-**Coach actions:**
-- Ask me to `cd` to repo root and then into `Day2_SQL_Data_Fundamentals/`.
-- Provide both PowerShell and bash commands.
-- Have me run `pwd`/`Get-Location` and list files; verify presence of `schema.sql`, `seed.sql`, `queries.sql`.
+**Coach:**  
+“We’re just making sure you’re in the Day 2 folder so every command works.”
 
-**Commands (PowerShell)**
+**Windows PowerShell**
 ```powershell
-cd <PATH_TO_REPO>
-cd Day2_SQL_Data_Fundamentals
+cd <PATH_TO_YOUR_REPO>\Day2_SQL_Data_Fundamentals
 Get-Location
 dir
 ````
 
-**Commands (bash)**
+**Mac/Linux bash**
 
 ```bash
-cd <PATH_TO_REPO>/Day2_SQL_Data_Fundamentals
+cd <PATH_TO_YOUR_REPO>/Day2_SQL_Data_Fundamentals
 pwd
 ls -la
 ```
 
-**Success looks like:** those three SQL files are present.
+**Success looks like:** I can see `schema.sql`, `seed.sql`, `queries.sql`.
+
+**Coach, ask me:** Paste your folder listing here. Do you see those three files?
 
 ---
 
-## Step 1 — Build DB (Option A: sqlite3 CLI)
+## Step 1 — Build the database (Option A: sqlite3 CLI)
 
-**Why:** Creates `lending_demo.db` from schema + seed for a repeatable baseline.
+**Coach:**
+“This turns the ‘blueprints’ (`schema.sql`) and ‘sample data’ (`seed.sql`) into a real, tiny database file.”
 
-**PowerShell**
-
-```powershell
-sqlite3 lending_demo.db ".read schema.sql"
-sqlite3 lending_demo.db ".read seed.sql"
-sqlite3 lending_demo.db ".tables"
-```
-
-**bash**
+**Windows PowerShell / Mac/Linux bash**
 
 ```bash
 sqlite3 lending_demo.db ".read schema.sql"
@@ -100,17 +87,20 @@ sqlite3 lending_demo.db ".read seed.sql"
 sqlite3 lending_demo.db ".tables"
 ```
 
-**Expect:** tables: `borrowers`, `applications`, `credit_events`, `kyc_checks`.
+**Success looks like:** The tables list shows `borrowers`, `applications`, `credit_events`, `kyc_checks`.
 
-**If it fails:** You probably don’t have the `sqlite3` CLI — use Step 1B.
+**If it fails:** You probably don’t have the `sqlite3` CLI. Use Step 1B.
+
+**Coach, ask me:** Paste the output of `.tables`.
 
 ---
 
-## Step 1B — Build DB (Option B: Python only)
+## Step 1B — Build the database (Option B: Python only)
 
-**Why:** Portable fallback using Python’s `sqlite3`.
+**Coach:**
+“If you don’t have the sqlite3 command, Python can do the same thing.”
 
-**PowerShell/bash (same code):**
+**Any OS**
 
 ```bash
 python - << 'PY'
@@ -125,54 +115,72 @@ con.close()
 PY
 ```
 
-**Expect:** `Tables: [...]` includes all 4 tables.
+**Success looks like:** `Tables:` includes all four table names above.
+
+**Coach, ask me:** Paste the `Tables:` line.
 
 ---
 
-## Step 2 — Sanity Queries
+## Step 2 — Quick sanity checks (are the numbers sensible?)
 
-**Why:** Quick product checks prove data is meaningful.
+**Coach:**
+“Let’s do two quick counts so we know the data makes sense.”
 
-**PowerShell/bash**
+**Any OS**
 
 ```bash
 sqlite3 lending_demo.db "select status, count(*) from applications group by 1 order by 2 desc;"
+sqlite3 lending_demo.db "select device, channel, round(100.0 * sum(case when status='approved'=1 then 1 else 0 end)/count(*),1) as approval_pct from applications group by device, channel order by approval_pct desc;"
+```
+
+> If your SQLite errors on the expression above, use this version instead (more portable):
+
+```bash
 sqlite3 lending_demo.db "select device, channel, round(100.0 * sum(case when status='approved' then 1 else 0 end)/count(*),1) as approval_pct from applications group by device, channel order by approval_pct desc;"
 ```
 
-**Expect:** At least 2 approved; approval% by device/channel returns numbers.
+**Success looks like:**
 
-**If it fails:** DB wasn’t built; redo Step 1/1B.
+* The first query shows a few statuses and counts.
+* The second shows approval percentages by device and channel.
+
+**If it fails:** The DB wasn’t built; repeat Step 1/1B.
+
+**Coach, ask me:** Paste both query outputs.
 
 ---
 
-## Step 3 — Run Full KPI Queries
+## Step 3 — Run the full KPI queries
 
-**Why:** Generate the exact outputs defined in `queries.sql`.
+**Coach:**
+“This runs the full set of questions from `queries.sql`—the same ones interviewers care about.”
 
-**PowerShell/bash**
+**Any OS**
 
 ```bash
 sqlite3 lending_demo.db ".read queries.sql"
 ```
 
-**Expect:**
+**Success looks like:** You see sections for:
 
 * Approval % by device/channel
-* Single abandonment % row
-* Minutes to approval for approved apps
-* Single flagged % row
-* Worst latency\_ms
+* Abandonment %
+* Minutes to approval (for approved apps)
+* Flagged %
+* Worst latency (ms) proxy
 
-**If it fails:** Check for typos in `queries.sql` or stray non-SQL text.
+**If it fails:** Check `queries.sql` for typos or stray non-SQL text.
+
+**Coach, ask me:** Paste the outputs (or a screenshot) of each section.
 
 ---
 
-## Step 4 — Install & Run Tests
+## Step 4 — Install and run tests (prove it automatically)
 
-**Why:** CI will run these; they must pass locally.
+**Coach:**
+“These tests prove the basics automatically so you don’t have to eyeball everything.”
 
-**PowerShell/bash**
+**Any OS**
 
 ```bash
 python -m pip install --upgrade pip
@@ -180,23 +188,23 @@ python -m pip install pytest
 pytest -q Day2_SQL_Data_Fundamentals
 ```
 
-**Expect:** All tests **pass** (0 failed).
+**Success looks like:** All tests **pass** (0 failed).
 
-**If it fails:** Ensure `lending_demo.db` exists; if the tests rebuild it, inspect error for FK or counts.
+**If it fails:**
+
+* Make sure `lending_demo.db` exists.
+* Read the last few lines of the error; share them so we can fix together.
+
+**Coach, ask me:** Paste the final pytest summary line.
 
 ---
 
-## Step 5 — Wire GitHub Actions CI
+## Step 5 — Turn on CI in GitHub (robot helper runs tests on push)
 
-**Why:** Proves repeatability on push/PR.
+**Coach:**
+“Every time you push code, GitHub will rebuild and retest this automatically. That shows reliability.”
 
-**Coach actions:**
-
-* Confirm `.github/workflows/sql-ci.yml` exists and includes: checkout → python → build DB → pytest.
-* If missing, generate it verbatim from the README/lesson.
-* Instruct me to `git add/commit/push`.
-
-**PowerShell/bash**
+**Any OS**
 
 ```bash
 git checkout -b day2-sql
@@ -205,75 +213,68 @@ git commit -m "Day 2: schema, seed, queries, tests, CI"
 git push -u origin day2-sql
 ```
 
-**Expect:** CI starts on the PR (green when done).
+Open a Pull Request (PR) in GitHub.
+
+**Success looks like:** A check called **sql-ci** appears and goes green.
+
+**Coach, ask me:** Share the PR link and whether **sql-ci** is green.
 
 ---
 
-## Step 6 — Add Environment-Gated “Deploy”
+## Step 6 — (Optional) Add a manual approval step (“staging”)
 
-**Why:** Demonstrates governance (human approval).
+**Coach:**
+“This is a pause button so changes don’t ‘deploy’ without a human yes. It demonstrates governance, which TPMs care about.”
 
-**Coach actions:**
+1. In GitHub: **Settings → Environments → New environment: `staging`**
+2. Add yourself as a **Required reviewer**
+3. In your PR’s **Checks** tab, find **deploy-staging** → click **Review deployments** → **Approve**
 
-* Confirm `.github/workflows/deploy-staging.yml` exists and targets `pull_request` to `main/master` with `environment: staging`.
-* Walk me through: GitHub → Settings → Environments → **staging** → add **Required reviewers** (me).
-* In PR Checks, show that `deploy-staging` is **Waiting**; I approve it; job runs.
+**Success looks like:** The job was **Waiting** and then **Succeeded** after your approval.
 
-**Expect:** A visible approval event and successful job.
+**Coach, ask me:** Confirm you saw the waiting job and approved it.
 
 ---
 
-## Step 7 — Merge
+## Step 7 — Merge and summarize the win
 
-**Coach actions:**
+**Coach:**
+“Let’s wrap it up.”
 
-* After CI green + deploy approved, instruct to merge PR.
-* Remind me to clean up the branch locally if desired.
+* Merge the PR when all checks are green (and staging approved if you used it).
 
-**PowerShell/bash**
+**Please summarize back to me (in your own words):**
 
-```bash
-git checkout main
-git pull
-git branch -d day2-sql
+1. What `schema.sql` and `seed.sql` do.
+2. Why the KPI queries matter to a product team.
+3. What the tests prove.
+4. What CI adds to your workflow.
+5. Why a manual approval step can be valuable.
+
+---
+
+## If I get stuck
+
+* **“sqlite3” not found:** Use Step 1B (Python fallback).
+* **Foreign keys not enforced:** Ensure `PRAGMA foreign_keys = ON;` before inserts (the tests handle this).
+* **CI didn’t start:** Did you push a branch and open a PR?
+* **Deploy job not waiting:** Create the `staging` environment and add yourself as a **Required reviewer**.
+
+---
+
+## What to keep as proof (for interviews)
+
+* Screenshot of `.tables` showing your four tables.
+* Screenshot of KPI query outputs (approval %, abandonment %, etc.).
+* Screenshot of `pytest` summary showing tests passed.
+* PR with **sql-ci** green.
+* (Optional) Screenshot of “staging” approval.
+
+> When you can explain these screenshots in plain words, you’ve nailed Day 2.
+
 ```
 
----
-
-## Step 8 — Evidence Pack (Paste Back)
-
-Ask me to paste the following as proof:
-
-* Output of `sqlite3 lending_demo.db ".tables"`
-* Output of each query section in `queries.sql`
-* `pytest -q` summary line
-* Screenshot or link to green **sql-ci** run
-* Screenshot of **staging** Environment approval in PR Checks
-
----
-
-## Troubleshooting Fast-Path
-
-* **Mermaid not rendering (README):** Keep \`\`\`mermaid fenced, one edge per line, no prose in the block.
-* **FK violations:** Ensure `PRAGMA foreign_keys = ON;` before inserts (tests handle this).
-* **CI red:** Open the job → read failing step log → fix and re-push.
-* **Deploy job not waiting:** Create Environment `staging`, set **Required reviewers**, target correct branch.
-
----
-
-## Final Deliverables
-
-* `schema.sql`, `seed.sql`, `queries.sql`
-* `tests/test_sql.py`
-* `.github/workflows/sql-ci.yml`
-* `.github/workflows/deploy-staging.yml`
-* A merged PR showing CI proof and an approved staging job.
-
-> **Coach:** Proceed step-by-step. Start with **Step 0** and ask me to run the commands and paste the outputs. Don’t move forward until we verify each checkpoint.
-
+Want me to drop this file into your `/prompts` folder contents (text) for Day 2 as well?
 ```
----
 
-If you want, I can also generate a **condensed “cheat-sheet” prompt** that focuses only on verification checkpoints (for quick demos).
-```
 
