@@ -261,36 +261,36 @@ flowchart LR
 %% ===== Day groups (horizontal flow) =====
 subgraph D1[Day 1 - Product fundamentals]
   A1[Vision]
-  A2[Roadmap (Now / Next / Later)]
-  A3[User stories + acceptance criteria]
+  A2[Roadmap: Now, Next, Later]
+  A3[User stories and acceptance criteria]
   A1 --> A2 --> A3
 end
 
 subgraph D2[Day 2 - SQL and data]
   B1[Build SQLite database]
   B2[Run KPI queries]
-  B3[Add tests + CI]
+  B3[Add tests and CI]
   A3 --> B1 --> B2 --> B3
 end
 
 subgraph D3[Day 3 - APIs and ingestion]
-  C1[Prototype client (timeouts, retries)]
+  C1[Prototype client: timeouts and retries]
   C2[Validate schema and errors]
-  C3[Ingest to SQLite (upsert)]
+  C3[Ingest to SQLite with upsert]
   B3 --> C1 --> C2 --> C3
 end
 
 subgraph D4[Day 4 - Python and R]
-  D1[A/B analysis (Python)]
-  D2[KPI chart (R)]
+  D1[AB analysis in Python]
+  D2[KPI chart in R]
   C3 --> D1 --> D2
 end
 
 subgraph D5[Day 5 - Interview readiness]
-  E1[Pitch + STAR stories]
+  E1[Pitch and STAR stories]
   E2[Product case readout]
-  E3[Tech recap (SQL, APIs, A/B)]
-  E4[CI validator + portfolio]
+  E3[Tech recap: SQL, APIs, AB]
+  E4[CI validator and portfolio]
   D2 --> E1 --> E2 --> E3 --> E4
 end
 
@@ -306,6 +306,7 @@ class B1,B2,B3 d2;
 class C1,C2,C3 d3;
 class D1,D2 d4;
 class E1,E2,E3,E4 d5;
+
 
 ```
 
